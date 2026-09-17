@@ -1,32 +1,61 @@
-# React + TypeScript + Vite
+# CloudPrep
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+**CloudPrep** es una plataforma de práctica personal para preparar certificaciones de AWS. Permite estudiar por dominios del examen, hacer simulacros cronometrados en condiciones similares al examen real, y seguir la evolución del progreso a lo largo del tiempo — todo desde el navegador, sin necesidad de cuenta ni servidor: los datos se guardan localmente en el propio dispositivo.
 
-Currently, two official plugins are available:
+## Para qué sirve
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+En lugar de memorizar preguntas sueltas, CloudPrep está pensada para preparar el examen de verdad:
 
-## React Compiler
+- **Banco de preguntas** — Practica pregunta a pregunta, con filtros por dominio del examen, servicio de AWS, dificultad y estado (respondidas, correctas, incorrectas, marcadas, guardadas). Cada pregunta incluye una explicación completa de por qué cada opción es correcta o incorrecta y, en muchas preguntas, un diagrama de arquitectura y enlaces a la documentación oficial de AWS.
+- **Simulacro de examen** — Exámenes cronometrados que reparten las preguntas entre los dominios oficiales según sus pesos reales, igual que en el examen de certificación. Incluye varios simulacros numerados (que rotan por el banco para repetir el mínimo posible de preguntas entre sí) y un modo aleatorio.
+- **Repaso inteligente** — Sesiones rápidas que priorizan automáticamente las preguntas falladas, las que no se han respondido todavía y los puntos más débiles.
+- **Mi progreso** — Estadísticas generales y por dominio/servicio AWS, historial de simulacros realizados (con opción de borrar resultados individuales o todo el historial), y detección de los temas que más conviene repasar.
+- **Español / inglés** — Todo el contenido (preguntas, respuestas y explicaciones) está disponible en ambos idiomas, con un selector para cambiar sobre la marcha sin perder las respuestas ya marcadas.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Certificaciones disponibles
 
-## Expanding the Oxlint configuration
+| Certificación | Preguntas en el banco |
+| --- | --- |
+| AWS Certified AI Practitioner (AIF-C01) | 391 |
+| AWS Certified Solutions Architect – Associate (SAA-C03) | 195 (ampliación en curso hasta 390) |
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+Ninguna pregunta reproduce el examen oficial de AWS ni proviene de un dump de examen real.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+## Privacidad
+
+CloudPrep no tiene backend ni sistema de cuentas: todo el progreso (respuestas, favoritos, resultados de simulacros) se guarda en el `localStorage` del navegador. Nada se envía a ningún servidor.
+
+## Stack técnico
+
+- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vite.dev/) como bundler y entorno de desarrollo
+- [Tailwind CSS v4](https://tailwindcss.com/) para los estilos
+- [React Router](https://reactrouter.com/) para la navegación
+- [lucide-react](https://lucide.dev/) para los iconos
+
+## Desarrollo local
+
+```bash
+npm install
+npm run dev       # entorno de desarrollo
+npm run build     # build de producción (carpeta dist/)
+npm run preview   # sirve el build de producción en local
+npm run lint       # linting con oxlint
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Estructura del proyecto
+
+```
+src/
+  components/   Componentes de UI (banco de preguntas, examen, estadísticas, comunes...)
+  pages/        Páginas/rutas de la aplicación
+  data/         Metadatos y bancos de preguntas por certificación
+  services/     Lógica de negocio (exámenes, progreso, estadísticas, almacenamiento)
+  stores/       Contexto de React (certificación activa, idioma, notificaciones)
+  types/        Tipos de TypeScript compartidos
+  utils/        Utilidades (traducción, puntuación, formato...)
+```
+
+---
+
+Banco de preguntas elaborado por [Cristina Cañadas](https://cristinagomez-limon.com/).
