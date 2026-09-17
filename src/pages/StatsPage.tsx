@@ -125,7 +125,36 @@ export default function StatsPage() {
                   Borrar todos
                 </Button>
               </div>
-              <div className="mt-4 overflow-x-auto rounded-2xl border border-surface-2 bg-surface-1">
+              {/* Móvil: tarjetas apiladas (la tabla no cabe sin scroll horizontal oculto) */}
+              <div className="mt-4 space-y-3 sm:hidden">
+                {examResults.map((r) => (
+                  <div key={r.id} className="rounded-2xl border border-surface-2 bg-surface-1 p-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <p className="text-sm text-text-secondary">{formatDate(r.finishedAt)}</p>
+                        <p className="mt-1 text-base font-semibold text-text-primary">
+                          {r.correct} / {r.total} <span className="text-text-secondary">({r.percentage}%)</span>
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setDeleteTarget(r.id)}
+                        className="focus-ring inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-text-muted transition-colors hover:bg-danger-muted hover:text-danger"
+                        aria-label="Eliminar simulacro"
+                      >
+                        <Trash2 size={16} strokeWidth={1.75} />
+                      </button>
+                    </div>
+                    <div className="mt-3 flex items-center gap-2">
+                      <Badge tone={r.passed ? 'success' : 'danger'}>{r.passed ? 'Aprobado' : 'No aprobado'}</Badge>
+                      <span className="text-xs text-text-muted">{formatDuration(r.timeSpentSeconds)}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Escritorio/tablet: tabla */}
+              <div className="mt-4 hidden overflow-x-auto rounded-2xl border border-surface-2 bg-surface-1 sm:block">
                 <table className="w-full min-w-[520px] text-left text-sm">
                   <thead className="text-xs uppercase text-text-muted">
                     <tr className="border-b border-surface-2">

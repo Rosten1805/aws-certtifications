@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { ArrowUp } from 'lucide-react'
+import { ArrowUp, SlidersHorizontal } from 'lucide-react'
 import { useCertification } from '@/stores/CertificationContext'
 import { useProgress } from '@/hooks/useProgress'
 import { useToast } from '@/stores/ToastContext'
@@ -33,6 +33,14 @@ export default function QuestionBankPage() {
   const [sortBy, setSortBy] = useState<SortOption>('number')
   const [randomOrder, setRandomOrder] = useState<number[]>(() => shuffle(questions.map((q) => q.id)))
   const [showBackToTop, setShowBackToTop] = useState(false)
+  const [filtersOpen, setFiltersOpen] = useState(false)
+
+  const activeFilterCount = [
+    filters.domain !== 'all',
+    filters.service !== 'all',
+    filters.difficulty !== 'all',
+    filters.status !== 'all',
+  ].filter(Boolean).length
 
   // Las respuestas del banco de preguntas se guardan solo en memoria, no en localStorage:
   // se pierden al salir de la página para que, cada vez que entres, las preguntas
@@ -127,7 +135,28 @@ export default function QuestionBankPage() {
       </div>
 
       <div className="rounded-2xl border border-surface-2 bg-surface-1 p-5">
-        <FilterPanel filters={filters} onChange={setFilters} domains={meta.domains} services={services} />
+        <button
+          type="button"
+          onClick={() => setFiltersOpen((v) => !v)}
+          className="focus-ring flex w-full items-center justify-between gap-2 sm:hidden"
+          aria-expanded={filtersOpen}
+        >
+          <span className="flex items-center gap-2 text-sm font-medium text-text-primary">
+            <SlidersHorizontal size={16} strokeWidth={1.75} />
+            Filtros
+            {activeFilterCount > 0 && (
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-blue text-xs font-semibold text-white">
+                {activeFilterCount}
+              </span>
+            )}
+          </span>
+          <span className="text-xs text-text-muted">{filtersOpen ? 'Ocultar' : 'Mostrar'}</span>
+        </button>
+
+        <div className={[filtersOpen ? 'mt-4' : 'hidden', 'sm:mt-0 sm:block'].join(' ')}>
+          <FilterPanel filters={filters} onChange={setFilters} domains={meta.domains} services={services} />
+        </div>
+
         <div className="mt-5 border-t border-surface-2 pt-5">
           <BankToolbar
             search={filters.search}
