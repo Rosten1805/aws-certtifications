@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  /* Fondo negro puro con superficies en escala de grises neutros, sin tinte azulado. */
+  --color-surface-0: #0a0a0a;
+  --color-surface-1: #121212;
+  --color-surface-2: #1a1a1a;
+  --color-surface-3: #262626;
+  --color-surface-4: #333333;
+
+  /* Letras en escala de grises: blanco casi puro para titulares, grises para el resto. */
+  --color-text-primary: #f5f5f4;
+  --color-text-secondary: #a3a3a0;
+  --color-text-muted: #6f6f6c;
+
+  /* Acento cálido (ámbar), para marca, CTAs y estados destacados. */
+  --color-brand-orange: #e8a25c;
+  --color-brand-orange-hover: #f0b578;
+  /* Acento frío (azul acero suave), para selección e información dentro de la práctica. */
+  --color-brand-blue: #8ab4f8;
+  --color-brand-blue-hover: #a6c8fa;
+
+  --color-success: #4ade80;
+  --color-success-muted: #16321f;
+  --color-danger: #f87171;
+  --color-danger-muted: #3a1a1a;
+  --color-warning: #eab308;
+  --color-warning-muted: #3a3115;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-surface-0);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-feature-settings: 'ss01' on, 'cv01' on;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+}
+
+* {
+  scrollbar-color: var(--color-surface-3) var(--color-surface-0);
+}
+
+::selection {
+  background-color: var(--color-brand-orange);
+  color: var(--color-surface-0);
+}
+
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-brand-orange);
+  outline-offset: 2px;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-toast-in {
+  animation: toast-in 0.2s ease-out;
+}

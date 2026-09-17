@@ -1,0 +1,32 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Material fuente de preguntas (HTML de examenes en ingles y español) - no se despliegan,
+# solo se usan localmente para extraer y traducir el banco de preguntas
+public/*.html
+public/exams aws certtified solutions architect español/
+
+# Estado local de Claude Code (sesiones, locks) - no forma parte de la app
+.claude/
