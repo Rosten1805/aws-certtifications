@@ -17,7 +17,7 @@ En lugar de memorizar preguntas sueltas, CloudPrep está pensada para preparar e
 | Certificación | Preguntas en el banco |
 | --- | --- |
 | AWS Certified AI Practitioner (AIF-C01) | 391 |
-| AWS Certified Solutions Architect – Associate (SAA-C03) | 195 (ampliación en curso hasta 390) |
+| AWS Certified Solutions Architect – Associate (SAA-C03) | 390 |
 
 Ninguna pregunta reproduce el examen oficial de AWS ni proviene de un dump de examen real.
 
